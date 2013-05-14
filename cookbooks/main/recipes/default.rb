@@ -7,6 +7,9 @@
 # use mdbtools recipe
 require_recipe "mdbtools"
 
+# write a custom database.yml
+require_recipe "heroku-database-yml"
+
 # uncomment to turn on thinking sphinx/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
 # require_recipe "sphinx"
 
