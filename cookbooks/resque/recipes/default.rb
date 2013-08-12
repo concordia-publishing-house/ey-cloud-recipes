@@ -2,7 +2,11 @@
 # Cookbook Name:: resque
 # Recipe:: default
 #
-if ['solo', 'util'].include?(node[:instance_role])
+
+instances = node[:engineyard][:environment][:instances]
+
+if (['util'].include?(node[:instance_role]) && node[:name] == 'redis') ||
+   (['solo', 'app_master'].include?(node[:instance_role]) && instances.length == 1)
   
   execute "install resque gem" do
     command "gem install resque redis redis-namespace yajl-ruby -r"
@@ -46,4 +50,5 @@ if ['solo', 'util'].include?(node[:instance_role])
       } 
     end
   end 
+  
 end
