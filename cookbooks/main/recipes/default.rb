@@ -4,6 +4,9 @@
 #  }
 #end
 
+# Install dotfiles
+include_recipe "dotfiles"
+
 # use mdbtools recipe
 include_recipe "mdbtools"
 
