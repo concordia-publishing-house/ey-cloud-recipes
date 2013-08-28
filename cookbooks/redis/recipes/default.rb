@@ -71,7 +71,7 @@ end
 
 if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
   
-  redis_instance = instances.length == 1 ? instances[0] : instances.find { |i| i[:name].to_s[/redis/] }
+  redis_instance = instances.length == 1 ? instances[0] : instances.find { |instance| instance['name'] == 'redis' }
   
   if redis_instance
     ip_address = `ping -c 1 #{redis_instance[:private_hostname]} | awk 'NR==1{gsub(/\\(|\\)/,"",$3); print $3}'`.chomp
