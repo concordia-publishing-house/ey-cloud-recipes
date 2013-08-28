@@ -3,10 +3,8 @@
 # Recipe:: default
 #
 
-instances = node[:engineyard][:environment][:instances]
-
-if (['util'].include?(node[:instance_role]) && node[:name] == 'redis') ||
-   (['solo', 'app_master'].include?(node[:instance_role]) && instances.length == 1)
+# Run resque workers on the application VMs
+if ['app_master', 'app', 'solo'].include?(node[:instance_role])
   
   execute "install resque gem" do
     command "gem install resque redis redis-namespace yajl-ruby -r"
