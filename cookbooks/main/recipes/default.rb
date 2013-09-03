@@ -108,6 +108,9 @@ include_recipe "redis"
 # To install a Jenkins environment, uncomment below
 # include_recipe "jenkins"
 
+#uncomment to include the newrelic_server_monitoring recipe
+require_recipe "newrelic_server_monitoring"
+
 #enable Extension modules for a given Postgresql database
 # if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
   # Extensions that support both Postgres 9.0, 9.1 and 9.2
