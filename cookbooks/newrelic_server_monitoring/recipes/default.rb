@@ -1,8 +1,8 @@
-enable_package "app-admin/newrelic-sysmond" do
+enable_package "sys-apps/newrelic-sysmond" do
   version "#{node[:newrelic][:version]}"
 end
 
-package "app-admin/newrelic-sysmond" do
+package "sys-apps/newrelic-sysmond" do
   action :install
   version "#{node[:newrelic][:version]}"
 end
