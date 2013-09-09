@@ -8,7 +8,7 @@
 include_recipe "dotfiles"
 
 # use mdbtools recipe
-include_recipe "mdbtools"
+# include_recipe "mdbtools"
 
 # uncomment to turn on thinking sphinx 2/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
 # include_recipe "sphinx"
@@ -60,7 +60,7 @@ include_recipe "mdbtools"
 #include_recipe "mongodb"
 
 #uncomment to run the resque recipe
-include_recipe "resque"
+# include_recipe "resque"
 
 #uncomment to run redis.yml recipe
 # include_recipe "redis-yml"
@@ -69,7 +69,7 @@ include_recipe "resque"
 # include_recipe "resque-scheduler"
 
 #uncomment to run the redis recipe
-include_recipe "redis"
+# include_recipe "redis"
 
 #uncomment to run the api-keys-yml recipe
 # include_recipe "api-keys-yml"
@@ -110,6 +110,9 @@ include_recipe "redis"
 
 #uncomment to include the newrelic_server_monitoring recipe
 require_recipe "newrelic_server_monitoring"
+
+# uncomment to include the nginx_redirects recipe
+require_recipe "nginx_redirects"
 
 #enable Extension modules for a given Postgresql database
 # if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
