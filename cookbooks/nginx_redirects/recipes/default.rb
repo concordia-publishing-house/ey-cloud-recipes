@@ -26,7 +26,7 @@ REDIRECTS = {
   '360unite.com'                => 'www.360unite.com',
 
   # BIBLE STUDY BUILDER
-  'biblestudybuilder.com'       => 'www.biblestudybuilder.com'
+  'biblestudybuilder.com'       => 'www.biblestudybuilder.com',
 
   # CHURCH 360
   'church360.net'               => 'www.church360.org',
