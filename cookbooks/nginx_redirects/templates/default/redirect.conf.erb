@@ -1,5 +1,5 @@
 server {
   listen 80;
-  server_name <%= origin %>;
-  return 302 $scheme://<%= destination %>$request_uri;
+  server_name <%= @origin %>;
+  return 302 $scheme://<%= @destination %>$request_uri;
 }
