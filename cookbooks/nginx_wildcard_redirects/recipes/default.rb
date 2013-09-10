@@ -11,7 +11,7 @@ REDIRECTS = {
   '360unite.org'   => '360unite.com'
 }
 
-if node[:instance_role] == 'solo'
+if ['solo', 'app_master', 'app'].include? node[:instance_role]
   node[:engineyard][:environment][:apps].each do |app|
     REDIRECTS.each do |origin, destination|
       template "/etc/nginx/servers/#{app[:name]}/z.#{origin}.conf" do
