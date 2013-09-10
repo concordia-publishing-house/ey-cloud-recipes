@@ -64,25 +64,40 @@ REDIRECTS = {
   'mysundaysolutions.com'       => 'www.mysundaysolutions.com',
 
   # SHEPHERD'S STAFF
-  'shepherdsstaff.org'          => 'www.shepherdsstaff.org'
+  'shepherdsstaff.org'          => 'www.shepherdsstaff.org',
+  
+  # WILDCARDS
+  '*.360members.net'            => '*.360members.com',
+  '*.360members.org'            => '*.360members.com',
+  '*.church360.org'             => '*.360members.com',
+  '*.360unite.net'              => '*.360unite.com',
+  '*.360unite.org'              => '*.360unite.com'
 }
 
 if ['solo', 'app_master', 'app'].include? node[:instance_role]
   node[:engineyard][:environment][:apps].each do |app|
     REDIRECTS.each do |origin, destination|
-      template "/etc/nginx/servers/#{app[:name]}/#{origin}.conf" do
-        source 'redirect.conf.erb'
+      erb_template = "redirect.conf.erb"
+      
+      if origin.include?("*")
+        origin = origin.gsub(/^\*\./, '')
+        destination = destination.gsub(/^\*\./, '')
+        erb_template = "wildcard_redirect.conf.erb"
+      end
+      
+      template "/etc/nginx/servers/redirect.#{origin}.conf" do
+        source erb_template
         owner node[:users][0][:username]
         group node[:users][0][:username]
         mode 0644
-
+        
         variables({
           origin: origin,
           destination: destination
         })
       end
     end
-
+    
     execute "sudo /etc/init.d/nginx reload"
   end
 end

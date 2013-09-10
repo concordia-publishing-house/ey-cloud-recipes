@@ -1,5 +1,5 @@
 server {
-  listen 80;
+  listen 81;
   server_name ~^(.*)\.<%= @origin %>$;
   return 302 $scheme://$1.<%= @destination %>$request_uri;
 }
