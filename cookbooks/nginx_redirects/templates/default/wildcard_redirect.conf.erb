@@ -3,3 +3,17 @@ server {
   server_name ~^(.*)\.<%= @origin %>$;
   return 302 $scheme://$1.<%= @destination %>$request_uri;
 }
+
+<% if @with_ssl %>
+server {
+  listen 444;
+  server_name ~^(.*)\.<%= @origin %>$;
+  
+  ssl on;
+  ssl_certificate /data/nginx/ssl/star.<%= @origin %>.crt;
+  ssl_certificate_key /data/nginx/ssl/star.<%= @origin %>.key;
+  ssl_protocols SSLv3 TLSv1;
+  
+  return 302 $scheme://$1.<%= @destination %>$request_uri;
+}
+<% end %>

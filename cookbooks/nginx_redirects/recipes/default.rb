@@ -74,18 +74,24 @@ REDIRECTS = {
   '*.360unite.org'              => '*.360unite.com'
 }
 
+ENABLE_SSL = ['lcmsdr.org', '*.church360.org']
+
 if ['solo', 'app_master', 'app'].include? node[:instance_role]
   node[:engineyard][:environment][:apps].each do |app|
     REDIRECTS.each do |origin, destination|
       erb_template = "redirect.conf.erb"
+      file_name = "redirect.#{origin}.conf"
+      
+      ssl = ENABLE_SSL.member? origin
       
       if origin.include?("*")
         origin = origin.gsub(/^\*\./, '')
         destination = destination.gsub(/^\*\./, '')
         erb_template = "wildcard_redirect.conf.erb"
+        file_name = "redirect.star.#{origin}.conf"
       end
       
-      template "/etc/nginx/servers/redirect.#{origin}.conf" do
+      template "/etc/nginx/servers/#{file_name}" do
         source erb_template
         owner node[:users][0][:username]
         group node[:users][0][:username]
@@ -93,7 +99,8 @@ if ['solo', 'app_master', 'app'].include? node[:instance_role]
         
         variables({
           origin: origin,
-          destination: destination
+          destination: destination,
+          with_ssl: ssl
         })
       end
     end
