@@ -10,6 +10,7 @@ bash "install_mdbtools" do
     mkdir -p #{TEMP_PATH}
     git clone git://github.com/brianb/mdbtools.git #{TEMP_PATH}/mdbtools
     cd "#{TEMP_PATH}/mdbtools"
+    git checkout a7a39a3
     autoreconf -i -f
     ./configure --disable-man
     make
