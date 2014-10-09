@@ -19,9 +19,7 @@ default[:sidekiq] = {
   # Queues
   :queues => {
     # :queue_name => priority
-    :default => 1,
-    :unite_staging_invite => 1,
-    :unite_production_invite => 1
+    :"unite:invite" => 1
   },
   
   # Verbose
