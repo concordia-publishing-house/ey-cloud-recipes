@@ -18,8 +18,8 @@ default[:sidekiq] = {
   
   # Queues
   :queues => {
-    :"relay:retrieve" => 1,
-    :"relay:deliver" => 1
+    "relay:retrieve" => 1,
+    "relay:deliver" => 1
   },
   
   # Verbose
