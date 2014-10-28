@@ -19,6 +19,7 @@ default[:sidekiq] = {
   # Queues
   :queues => {
     "relay:retrieve" => 1,
+    "relay:resolve" => 1,
     "relay:deliver" => 1
   },
   
