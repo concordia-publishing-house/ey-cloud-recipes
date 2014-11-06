@@ -21,7 +21,8 @@ default[:sidekiq] = {
     # :queue_name => priority
     "unite:invite" => 1,
     "unite:user_invite" => 1,
-    "unite:event_reminder" => 1
+    "unite:event_reminder" => 1,
+    "unite:text_message" => 1
   },
   
   # Verbose
