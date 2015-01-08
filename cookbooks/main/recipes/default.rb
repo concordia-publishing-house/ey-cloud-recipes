@@ -160,3 +160,10 @@ require_recipe "newrelic_server_monitoring"
   # postgresql9_pg_buffercache "postgres"
   # postgresql9_pg_freespacemap "postgres"
 #end
+
+# Require Postgres to be compiled with Thread support:
+if %w{app_master solo util}.include? @node[:instance_role] then
+  execute "Adding threads to postgresql-client" do
+    command 'USE="threads" emerge --newuse dev-db/postgresql-base -g'
+  end
+end
