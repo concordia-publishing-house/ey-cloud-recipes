@@ -19,8 +19,10 @@ default[:sidekiq] = {
   # Queues
   :queues => {
     # :queue_name => priority
-    "members:email_contribution_statement" => 1, 
-    "members:email_invites" => 1
+    "members:email_contribution_statement" => 1,
+    "members:email_invites" => 1,
+    "members:church_directories" => 1,
+    "members:contribution_statements" => 1
   },
   
   # Verbose
