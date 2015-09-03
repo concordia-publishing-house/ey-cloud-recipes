@@ -3,6 +3,8 @@
 # Recipe:: default
 #
 
+# This recipe has been modified to be specifically tuned for the Importer
+
 # Run resque workers only on utility VMs
 # if ['app_master', 'app', 'solo'].include?(node[:instance_role])
 if node[:instance_role] == "solo" || (node[:instance_role] == "util" && node[:name] !~ /resque/)
@@ -12,13 +14,7 @@ if node[:instance_role] == "solo" || (node[:instance_role] == "util" && node[:na
     not_if { "gem list | grep resque" }
   end
 
-  case node[:ec2][:instance_type]
-  when 'm1.small' then worker_count = 2
-  when 'c1.medium'then worker_count = 3
-  when 'c1.xlarge' then worker_count = 8
-  else worker_count = 4
-  end
-
+  worker_count = 1
 
   node[:applications].each do |app, data|
     template "/etc/monit.d/resque_#{app}.monitrc" do
