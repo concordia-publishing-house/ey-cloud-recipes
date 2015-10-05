@@ -1,0 +1,5 @@
+check process newrelic_postgres_plugin
+  with pidfile /var/run/newrelic_postgres_plugin.pid
+  start program = "/etc/init.d/newrelic_postgres_plugin start"
+  stop program = "/etc/init.d/newrelic_postgres_plugin stop"
+  group newrelic

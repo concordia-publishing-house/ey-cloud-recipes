@@ -2,7 +2,10 @@
 # Cookbook Name:: resque
 # Recipe:: default
 #
-if ['solo', 'util'].include?(node[:instance_role])
+
+# Run resque workers only on utility VMs
+# if ['app_master', 'app', 'solo'].include?(node[:instance_role])
+if node[:instance_role] == "solo" || (node[:instance_role] == "util" && node[:name] !~ /resque/)
   
   execute "install resque gem" do
     command "gem install resque redis redis-namespace yajl-ruby -r"
@@ -46,4 +49,5 @@ if ['solo', 'util'].include?(node[:instance_role])
       } 
     end
   end 
+  
 end

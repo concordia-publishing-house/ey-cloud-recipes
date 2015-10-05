@@ -4,6 +4,14 @@
 #  }
 #end
 
+# Install dotfiles
+include_recipe "dotfiles"
+
+# use mdbtools recipe
+include_recipe "mdbtools"
+
+# include_recipe "newrelic_postgres_plugin"
+
 # uncomment to turn on thinking sphinx 2/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
 # include_recipe "sphinx"
 
@@ -17,7 +25,7 @@
 # include_recipe "ban"
 
 # uncomment to use the sidekiq recipe. See cookbooks/sidekiq/readme.md for documentation.
-# include_recipe "sidekiq"
+include_recipe "sidekiq"
 
 #uncomment to turn on memcached
 # include_recipe "memcached"
@@ -54,7 +62,7 @@
 #include_recipe "mongodb"
 
 #uncomment to run the resque recipe
-# include_recipe "resque"
+include_recipe "resque"
 
 #uncomment to run redis.yml recipe
 # include_recipe "redis-yml"
@@ -63,7 +71,7 @@
 # include_recipe "resque-scheduler"
 
 #uncomment to run the redis recipe
-#include_recipe "redis"
+# include_recipe "redis"
 
 #uncomment to run the api-keys-yml recipe
 # include_recipe "api-keys-yml"
@@ -101,6 +109,9 @@
 
 # To install a Jenkins environment, uncomment below
 # include_recipe "jenkins"
+
+#uncomment to include the newrelic_server_monitoring recipe
+# require_recipe "newrelic_server_monitoring"
 
 #enable Extension modules for a given Postgresql database
 # if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
@@ -149,3 +160,10 @@
   # postgresql9_pg_buffercache "postgres"
   # postgresql9_pg_freespacemap "postgres"
 #end
+
+# Require Postgres to be compiled with Thread support:
+if %w{app_master solo util}.include? @node[:instance_role] then
+  execute "Adding threads to postgresql-client" do
+    command 'USE="threads" emerge --newuse dev-db/postgresql-base -g'
+  end
+end
