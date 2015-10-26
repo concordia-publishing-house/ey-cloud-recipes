@@ -8,7 +8,7 @@ TEMP_PATH = "/etc/chef-custom/tmp"
 bash "install_mdbtools" do
   code <<-BASH
     mkdir -p #{TEMP_PATH}
-    git clone git://github.com/brianb/mdbtools.git #{TEMP_PATH}/mdbtools
+    git clone --branch 0.7.1 git://github.com/brianb/mdbtools.git #{TEMP_PATH}/mdbtools
     cd "#{TEMP_PATH}/mdbtools"
     autoreconf -i -f
     ./configure --disable-man
