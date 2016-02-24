@@ -24,7 +24,8 @@ default[:sidekiq] = {
     "members:church_directories" => 1,
     "members:contribution_statements" => 1,
     "members:mailing_labels" => 1,
-    "members:attendance_sheets" => 1
+    "members:attendance_sheets" => 1,
+    "members:application_mailer" => 1
   },
 
   # Verbose
