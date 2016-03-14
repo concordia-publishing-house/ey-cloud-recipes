@@ -3,7 +3,7 @@
 # Recipe:: setup
 #
 
-if util_or_app_server?(node[:sidekiq][:utility_name]) && node[:environment][:name] != "members_beta"
+if util_or_app_server?(node[:sidekiq][:utility_name])
   # report to dashboard
   ey_cloud_report "sidekiq" do
     message "Setting up sidekiq"
