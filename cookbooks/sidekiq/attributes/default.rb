@@ -9,13 +9,13 @@ default[:sidekiq] = {
   # only be installed on to a utility instance that matches
   # the name
   :utility_name => 'sidekiq',
-  
+
   # Number of workers (not threads)
   :workers => 1,
-  
+
   # Concurrency
   :concurrency => 1,
-  
+
   # Queues
   :queues => {
     # :queue_name => priority
@@ -24,7 +24,7 @@ default[:sidekiq] = {
     "unite:event_reminder" => 1,
     "unite:post_publisher" => 1
   },
-  
+
   # Verbose
   :verbose => false
 }
